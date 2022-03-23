@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+
+    protected $visible = [
+        'id',
+        'title',
+        'author',
+        'publish_year',
+        'page_count'
+    ];
 }
