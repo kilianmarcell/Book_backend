@@ -17,7 +17,9 @@ class RentalsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'book_id' => $this->faker->numberBetween(1, 15),
+            'start_date' => $this->faker->dateTimeBetween('-30 days', '+0 days'),
+            'end_date' => $this->faker->dateTimeBetween('-0 days', '+30 days')
         ];
     }
 }
