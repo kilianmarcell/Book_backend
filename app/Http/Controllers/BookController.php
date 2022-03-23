@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Book as RequestsBook;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
@@ -35,8 +36,17 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestsBook $request)
+    public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), (new RequestsBook())->rules());
+        if ($validator->fails()) {
+            $errormsg = "";
+            foreach ($validator->errors()->all() as $error) {
+                $errormsg .= $error . " ";
+            }
+            $errormsg = trim($errormsg);
+            return response()->json($errormsg, 400);
+        }
         $book = new Book();
         $book->fill($request->all())->save();
         return response()->json($book, 201);
