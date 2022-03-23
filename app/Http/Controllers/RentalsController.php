@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rentals;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class RentalsController extends Controller
@@ -33,9 +34,14 @@ class RentalsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, int $id)
     {
-        //
+        $rental = new Rentals();
+        $rental->book_id = $id;
+        $rental->start_date = Carbon::now();
+        $rental->end_date = Carbon::now()->add(1, 'week');
+        $rental->save();
+        return response()->json($rental, 201);
     }
 
     /**

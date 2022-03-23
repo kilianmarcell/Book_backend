@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Rentals extends Model
 {
     use HasFactory;
+
+    protected $visible = [
+        'id',
+        'book_id',
+        'start_date',
+        'end_date'
+    ];
 }
