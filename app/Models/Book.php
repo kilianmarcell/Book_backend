@@ -16,4 +16,12 @@ class Book extends Model
         'publish_year',
         'page_count'
     ];
+
+    protected $fillable = [
+        'id',
+        'title',
+        'author',
+        'publish_year',
+        'page_count'
+    ];
 }

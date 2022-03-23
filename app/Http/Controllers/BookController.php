@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Book as RequestsBook;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -34,9 +35,11 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RequestsBook $request)
     {
-        //
+        $book = new Book();
+        $book->fill($request->all())->save();
+        return response()->json($book, 201);
     }
 
     /**
